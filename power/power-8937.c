@@ -128,7 +128,7 @@ int  power_hint_override(struct power_module *module, power_hint_t hint,
     static struct timespec s_previous_boost_timespec;
     struct timespec cur_boost_timespec;
     long long elapsed_time;
-    int resources_launch_boost[] = {
+    int resources_launch[] = {
         SCHED_BOOST_ON_V3, 0x1,
         MAX_FREQ_BIG_CORE_0, 0xFFF,
         MAX_FREQ_LITTLE_CORE_0, 0xFFF,
@@ -194,10 +194,10 @@ int  power_hint_override(struct power_module *module, power_hint_t hint,
                         resources_interaction_boost);
             }
             return HINT_HANDLED;
-        case POWER_HINT_LAUNCH_BOOST:
+        case POWER_HINT_LAUNCH:
             duration = 2000;
-            interaction(duration, ARRAY_SIZE(resources_launch_boost),
-                    resources_launch_boost);
+            interaction(duration, ARRAY_SIZE(resources_launch),
+                    resources_launch);
             return HINT_HANDLED;
         case POWER_HINT_CPU_BOOST:
             duration = *(int32_t *)data / 1000;
